@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace TechJobsConsole
@@ -20,7 +22,7 @@ namespace TechJobsConsole
          * Returns a list of all values contained in a given column,
          * without duplicates. 
          */
-        public static List<string> FindAll(string column)
+        public static List<string> FindAll(string column) 
         {
             LoadData();
 

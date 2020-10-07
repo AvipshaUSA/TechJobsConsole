@@ -43,7 +43,9 @@ namespace TechJobsConsole
                     else
                     {
                         List<string> results = JobData.FindAll(columnChoice);
-                        results.Sort();
+
+                        results.Sort();// sorting the items in alphabetcal order.
+                        results.ToArray(); // copies the element of the List to an array.
                         
                         Console.WriteLine("\n*** All " + columnChoices[columnChoice] + " Values ***");
                         foreach (string item in results)
