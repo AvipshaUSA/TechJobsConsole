@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace TechJobsConsole
 {
@@ -23,13 +24,13 @@ namespace TechJobsConsole
             columnChoices.Add("all", "All");
 
             Console.WriteLine("Welcome to LaunchCode's TechJobs App!");
-
+        
             // Allow user to search/list until they manually quit with ctrl+c
             while (true)
             {
 
                 string actionChoice = GetUserSelection("View Jobs", actionChoices);
-
+                int count = 0;
                 if (actionChoice.Equals("list"))
                 {
                     string columnChoice = GetUserSelection("List", columnChoices);
@@ -42,12 +43,13 @@ namespace TechJobsConsole
                     else
                     {
                         List<string> results = JobData.FindAll(columnChoice);
-                    
-
+                        results.Sort();
+                        
                         Console.WriteLine("\n*** All " + columnChoices[columnChoice] + " Values ***");
                         foreach (string item in results)
                         {
-                            Console.WriteLine(item);
+                            count++;
+                            Console.WriteLine( $"{count} - {item} ");
                         }
                     }
                 }
@@ -73,6 +75,7 @@ namespace TechJobsConsole
                     else
                     {
                         searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
+                        
                         PrintJobs(searchResults);
                     }
                 }
@@ -131,10 +134,11 @@ namespace TechJobsConsole
                     Console.WriteLine("\n*****");
                     foreach (KeyValuePair<string, string> column in job)
                     {
+
                         Console.WriteLine(column.Key + ": " + column.Value);
                     }
                     Console.WriteLine("*****");
-                    Console.WriteLine("job count: {0}", someJobs.Count);
+                    //Console.WriteLine("job count: {0}", someJobs.Count);
                 }
             }
             else

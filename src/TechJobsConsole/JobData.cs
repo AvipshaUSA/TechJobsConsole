@@ -84,10 +84,14 @@ namespace TechJobsConsole
 
         //----------------------------------------------
 
-        /*
-         * Load and parse data from job_data.csv
-         */
-        private static void LoadData()
+
+
+        //----------------------------------------------
+
+            /*
+             * Load and parse data from job_data.csv
+             */
+            private static void LoadData()
         {
 
             if (IsDataLoaded)
