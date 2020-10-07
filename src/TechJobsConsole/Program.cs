@@ -33,6 +33,7 @@ namespace TechJobsConsole
                 if (actionChoice.Equals("list"))
                 {
                     string columnChoice = GetUserSelection("List", columnChoices);
+                    Console.WriteLine(columnChoice);
 
                     if (columnChoice.Equals("all"))
                     {
@@ -41,6 +42,7 @@ namespace TechJobsConsole
                     else
                     {
                         List<string> results = JobData.FindAll(columnChoice);
+                    
 
                         Console.WriteLine("\n*** All " + columnChoices[columnChoice] + " Values ***");
                         foreach (string item in results)
@@ -63,7 +65,10 @@ namespace TechJobsConsole
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
+                       // Console.WriteLine("Search all fields not yet implemented.");
                     }
                     else
                     {
@@ -118,7 +123,26 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("PrintJobs is not implemented yet");
+            //Console.WriteLine("PrintJobs is not implemented yet--------------");
+            if (someJobs.Count != 0)
+            {
+                foreach (Dictionary<string, string> job in someJobs)
+                {
+                    Console.WriteLine("\n*****");
+                    foreach (KeyValuePair<string, string> column in job)
+                    {
+                        Console.WriteLine(column.Key + ": " + column.Value);
+                    }
+                    Console.WriteLine("*****");
+                    Console.WriteLine("job count: {0}", someJobs.Count);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Result Not Found! ");
+            }
+
+
         }
     }
 }

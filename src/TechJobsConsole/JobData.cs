@@ -25,7 +25,7 @@ namespace TechJobsConsole
             LoadData();
 
             List<string> values = new List<string>();
-
+             
             foreach (Dictionary<string, string> job in AllJobs)
             {
                 string aValue = job[column];
@@ -57,6 +57,32 @@ namespace TechJobsConsole
 
             return jobs;
         }
+        //-------------------------ALL Search ------------------------
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+            LoadData();
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> job in AllJobs)
+            {
+                foreach (KeyValuePair<string, string> column in job)
+                {
+                    string str = column.Value.ToLower(); // making all column value of job into lowere case
+
+                    if (str.Contains(value.ToLower())) // also need to user value passing as arg, into lower case
+                    {
+                        if ((!jobs.Contains(job)))
+                        {
+                            jobs.Add(job);
+                        }
+                    }
+                }
+            }
+            return jobs;
+        }
+
+
+        //----------------------------------------------
 
         /*
          * Load and parse data from job_data.csv
@@ -101,6 +127,8 @@ namespace TechJobsConsole
 
             IsDataLoaded = true;
         }
+
+
 
         /*
          * Parse a single line of a CSV file into a string array
