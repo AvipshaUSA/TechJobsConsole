@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Reflection;
@@ -69,11 +70,15 @@ namespace TechJobsConsole
             {
                 foreach (KeyValuePair<string, string> column in job)
                 {
-                    string str = column.Value.ToLower(); // making all column value of job into lowere case
-
-                    if (str.Contains(value.ToLower())) // also need to user value passing as arg, into lower case
+                    string str = column.Value; //ToLower(); // making all column value of job into lowere case
+                    str = str.ToLower();
+                  
+                    string userStr = value.ToLower();
+                 
+                    if (str.Contains(userStr)) // also need to user value passing as arg, into lower case
                     {
                         if ((!jobs.Contains(job)))
+                       //if(str.Contains(value) || userStr.Contains(value))
                         {
                             jobs.Add(job);
                         }
